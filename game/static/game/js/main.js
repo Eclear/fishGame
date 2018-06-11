@@ -28,6 +28,14 @@ var my;
 
 var high_score;
 
+function get_newscore() {
+    return high_score;
+}
+
+function update_data(){
+    return (data.gameOver && high_score == data.score)
+}
+
 function set_high(high) {
     high_score = high;
 }

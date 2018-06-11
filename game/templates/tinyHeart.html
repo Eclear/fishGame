@@ -54,24 +54,35 @@
                 var high = {{ history_high | safe }};
                 set_high(high);
                 game();
+                setInterval(function(){
+                  refreshData()
+                }, 3000);
             });
-            $(document).ready(function(){
-              $("#sum").click(function(){
-                  var id = {{ user_id | safe }}
 
-                $.get("/get_high/",{'id':id }, function(ret){
-                    set_high(ret);
-{#                    alert(ret);#}
-                })
-              });
+            //check the update of Database history high at fixed time(3s)
+            function refreshData(){
+                if(update_data()){
+                        var new_score = get_newscore();
+                        var id = {{ user_id | safe }};
+                        $.get("/update_data/",{'new_score':new_score,'id':id },function(ret){
+                    })
+                }
+            }
+
+            $(document).ready(function(){
+                //refresh high score
+                $("#sum").click(function () {
+                    if(update_data()){
+                        var new_score = get_newscore();
+                        var id = {{ user_id | safe }};
+                        alert(new_score);
+                        $.get("/update_data/",{'new_score':new_score,'id':id },function(ret){
+
+                    })
+                }
+                });
+
             });
-{#            function getUrlPara(paraName){#}
-{#                var sUrl  =  location.href;#}
-{#                var sReg  =  "(?://?|&){1}"+paraName+"=([^&]*)"#}
-{#                var re=new RegExp(sReg,"gi");#}
-{#                re.exec(sUrl);#}
-{#                return RegExp.$1;#}
-{#            }#}
     </script>
 </head>
 <body>
@@ -92,38 +103,36 @@
             a: <input type="text" id="a" name="a"> <br>
             b: <input type="text" id="b" name="b"> <br>
             <p>result: <span id='result'></span></p>
-            <button type="button" id='sum'>提交</button>
+            <button type="button" id='sum'>更新</button>
         </form>
 
 
 
-        <script>
-            $(document).ready(function(){
-              $("#sum").click(function(){
-                var a = $("#a").val();
-                var b = $("#b").val();
+{#        <script>#}
+{#            $(document).ready(function(){#}
+{#              $("#sum").click(function(){#}
+{#                var a = $("#a").val();#}
+{#                var b = $("#b").val();#}
+{##}
+{#                $.get("/add/",{'a':a,'b':b}, function(ret){#}
+{#                    $('#result').html(ret)#}
+{#                })#}
+{#              });#}
+{#            });#}
+{#        </script>#}
 
-                $.get("/add/",{'a':a,'b':b}, function(ret){
-                    $('#result').html(ret)
-                })
-              });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function(){
-              $("#sum").click(function(){
-                var a = $("#a").val();
-                var b = $("#b").val();
-
-                $.get("/add/",{'a':a,'b':b}, function(ret){
-                    $('#result').html(ret)
-                })
-                  alert(getUrlPara("a"));
-              });
-            });
-        </script>
-
-        <p>try click</p>
+{#        <script>#}
+{#            $(document).ready(function(){#}
+{#              $("#sum").click(function(){#}
+{#                var a = $("#a").val();#}
+{#                var b = $("#b").val();#}
+{##}
+{#                $.get("/add/",{'a':a,'b':b}, function(ret){#}
+{#                    $('#result').html(ret)#}
+{#                })#}
+{#                  alert(getUrlPara("a"));#}
+{#              });#}
+{#            });#}
+{#        </script>#}
 </body>
 </html>

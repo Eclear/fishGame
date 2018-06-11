@@ -49,8 +49,10 @@ def add(request):
     b = int(b)
     return HttpResponse(str(a+b))
 
-def get_high(request):
+def update_data(request):
+    new_score = int(request.GET['new_score'])
     id = int(request.GET['id'])
     player = User.objects.get(user_id=id)
-    high = player.history_high
-    return HttpResponse(str(high))
+    player.history_high = new_score
+    player.save()
+    return HttpResponse()
