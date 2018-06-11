@@ -33,9 +33,12 @@ dataObj.prototype.addScore = function () {
     this.score += this.scoreToAdd;
     this.times = 1;
     this.fruitNum = 0;
+    if(this.score > high_score){
+        set_high(this.score)
+    }
 }
 
-dataObj.prototype.draw = function (high_score) {
+dataObj.prototype.draw = function () {
     //time counter
     for(var i = 0; i < fruit.typeNum; i++){
         if(this.timeCounter[i] > 0)

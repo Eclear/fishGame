@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
+from django.http import JsonResponse
 import json
 
 from django.shortcuts import render
@@ -37,6 +38,7 @@ def game_view(request,user_id):
     data = {
         'history_high': json.dumps(high),
         'friends': friends,
+        'user_id':json.dumps(user_id),
     }
     return render(request, 'tinyHeart.html', data)
 
@@ -46,3 +48,9 @@ def add(request):
     a = int(a)
     b = int(b)
     return HttpResponse(str(a+b))
+
+def get_high(request):
+    id = int(request.GET['id'])
+    player = User.objects.get(user_id=id)
+    high = player.history_high
+    return HttpResponse(str(high))

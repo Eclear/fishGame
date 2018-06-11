@@ -28,12 +28,15 @@ var my;
 
 var high_score;
 
+function set_high(high) {
+    high_score = high;
+}
+
 // document.body.onload = game;
-function game(high){
+function game(){
     init();
     lastTime = Date.now();
     deltaTime = 0;
-    high_score = high;
     gameloop();
 }
 function init() {
@@ -99,7 +102,7 @@ function gameloop(){
     baby.draw();
     momBabyCollision();
 
-    data.draw(high_score);
+    data.draw();
 
     wave.draw();
     waveRed.draw();

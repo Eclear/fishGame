@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^manage/', include('backEnd.urls',namespace='backEnd')),
     url(r'^game/', include('game.urls',namespace='game')),
     url(r'^add/$', gv.add, name='add'),
+    url(r'^get_high/$', gv.get_high, name='add'),
 ]
