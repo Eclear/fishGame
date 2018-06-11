@@ -31,6 +31,7 @@ def empty_data():
         player.save()
 
 def game_view(request,user_id):
+    # add_friend(1,3)
     player = User.objects.get(user_id = user_id)
     high = player.history_high
     friends = player.friends.all()

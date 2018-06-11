@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>tinyHeart</title>
     <style type="text/css">
@@ -36,19 +37,19 @@
         }
     </style>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-        <script>!window.jQuery && document.write(unescape('%3Cscript src="{% static 'game/js/jquery-3.3.1.min.js' %}"%3E%3C/script%3E'))</script>
-        <script type="text/javascript" src="{% static 'game/js/main.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/commonFunctions.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/background.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/ane.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/fruit.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/bigFish.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/collision.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/baby.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/data.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/wave.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/waveRed.js' %}"></script>
-        <script type="text/javascript" src="{% static 'game/js/dust.js' %}"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="{% static 'game/js/jquery-3.3.1.min.js' %}"%3E%3C/script%3E'))</script>
+    <script type="text/javascript" src="{% static 'game/js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/commonFunctions.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/background.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/ane.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/fruit.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/bigFish.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/collision.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/baby.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/data.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/wave.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/waveRed.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/dust.js' %}"></script>
     <script>
             $(document).ready(function () {
                 var high = {{ history_high | safe }};
@@ -92,47 +93,18 @@
                 <canvas id="canvas2" width="800" height="600"></canvas>
             </div>
         </div>
-        <h3>history high:  {{ history_high }}</h3><br>
+        <h3>history high:  {{ history_high |safe }}</h3><br>
         <h3>friends</h3>
         {% for friend in friends %}
             <h4>{{ friend.username }}   {{ friend.history_high }}</h4>
         {% endfor %}
 
-        <p>请输入两个数字</p>
-        <form action="/add/" method="get">
-            a: <input type="text" id="a" name="a"> <br>
-            b: <input type="text" id="b" name="b"> <br>
-            <p>result: <span id='result'></span></p>
-            <button type="button" id='sum'>更新</button>
-        </form>
+{#        <form action="/add/" method="get">#}
+{#            a: <input type="text" id="a" name="a"> <br>#}
+{#            b: <input type="text" id="b" name="b"> <br>#}
+{#            <p>result: <span id='result'></span></p>#}
+{#            <button type="button" id='sum'>更新</button>#}
+{#        </form>#}
 
-
-
-{#        <script>#}
-{#            $(document).ready(function(){#}
-{#              $("#sum").click(function(){#}
-{#                var a = $("#a").val();#}
-{#                var b = $("#b").val();#}
-{##}
-{#                $.get("/add/",{'a':a,'b':b}, function(ret){#}
-{#                    $('#result').html(ret)#}
-{#                })#}
-{#              });#}
-{#            });#}
-{#        </script>#}
-
-{#        <script>#}
-{#            $(document).ready(function(){#}
-{#              $("#sum").click(function(){#}
-{#                var a = $("#a").val();#}
-{#                var b = $("#b").val();#}
-{##}
-{#                $.get("/add/",{'a':a,'b':b}, function(ret){#}
-{#                    $('#result').html(ret)#}
-{#                })#}
-{#                  alert(getUrlPara("a"));#}
-{#              });#}
-{#            });#}
-{#        </script>#}
 </body>
 </html>
