@@ -35,7 +35,7 @@ dataObj.prototype.addScore = function () {
     this.fruitNum = 0;
 }
 
-dataObj.prototype.draw = function () {
+dataObj.prototype.draw = function (high_score) {
     //time counter
     for(var i = 0; i < fruit.typeNum; i++){
         if(this.timeCounter[i] > 0)
@@ -46,13 +46,20 @@ dataObj.prototype.draw = function () {
     var w = can1.width;
     var h = can1.height;
 
+
+    //Draw score
     ctx1.save();
     ctx1.shadowBlur = 10;
     ctx1.shadowColor = "white";
     ctx1.fillStyle = "white";
     ctx1.font = "30px Verdana";
     ctx1.textAlign = "center";  //align: left,center,right
-    ctx1.fillText("Score: "+this.score, w*0.5, 50);
+    ctx1.fillText("Score: "+this.score, w*0.12, 50);
+
+    ctx1.fillText("High: "+high_score, w*0.12, 100);
+
+
+
     //score of this time
     if(this.alpha1 && this.alpha1 < Math.PI){
         this.alpha1 += deltaTime * 0.002 * Math.PI;

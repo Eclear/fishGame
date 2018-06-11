@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-# import game.views as gv
+import game.views as gv
 
 
 from django.conf import settings
@@ -26,4 +26,5 @@ urlpatterns = [
     # url(r'^$',gv.game_view,name='game_view'),
     url(r'^manage/', include('backEnd.urls',namespace='backEnd')),
     url(r'^game/', include('game.urls',namespace='game')),
+    url(r'^add/$', gv.add, name='add'),
 ]

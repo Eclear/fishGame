@@ -26,13 +26,14 @@ var dust;
 var mx;
 var my;
 
+var high_score;
 
-
-document.body.onload = game;
-function game(){
+// document.body.onload = game;
+function game(high){
     init();
     lastTime = Date.now();
     deltaTime = 0;
+    high_score = high;
     gameloop();
 }
 function init() {
@@ -98,7 +99,7 @@ function gameloop(){
     baby.draw();
     momBabyCollision();
 
-    data.draw();
+    data.draw(high_score);
 
     wave.draw();
     waveRed.draw();
