@@ -6,4 +6,7 @@ urlpatterns = [
     url(r'^$', views.online_page,name='online_page'),
     url(r'^register/$', views.register_page,name='register_page'),
     url(r'^registeraction/$', views.register,name='register'),
+    url(r'^login/$', views.login,name='login'),
+    url(r'^loginsuccess/(?P<type_id>[0-9]+)$',views.login_success,name='login_success'),
+
 ]

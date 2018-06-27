@@ -70,28 +70,28 @@
             </div>
         </div>
 
-{#    <form style="width: auto" action="{% url 'online:login'%}" method="post">#}
-{#        {% csrf_token %}#}
-{#       <div class="text-center" >#}
-{#           <div class="form-group text-center">#}
-{#               <input type="text" name="username" class="form-control" placeholder="用户名*">#}
-{#           </div>#}
-{#           <div class="form-group text-center">#}
-{#               <input type="text" name="password" class="form-control" placeholder="密码*">#}
-{#           </div>#}
-{##}
-{#        </div><br>#}
-{#        <div class="row">#}
-{#            <div class="col-md-12 text-center">#}
-{#                <button type="submit" class="btn btn-primary" name="sub">登录</button>#}
-{#            </div>#}
-{#        </div>#}
-{#    </form><br><br>#}
-{#        <div class="row" >#}
-{#            <div class="col-md-12 text-center">#}
-{#                <a type="submit" class="btn btn-primary" href="{% url 'online:register_page'%}">注册</a>#}
-{#            </div>#}
-{#        </div>#}
+    <form style="width: auto" action="{% url 'backEnd:login'%}" method="post">
+        {% csrf_token %}
+       <div class="text-center" >
+           <div class="form-group text-center">
+               <input type="text" name="username" class="form-control" placeholder="用户名*">
+           </div>
+           <div class="form-group text-center">
+               <input type="text" name="password" class="form-control" placeholder="密码*">
+           </div>
+
+        </div><br>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary" name="sub">登录</button>
+            </div>
+        </div>
+    </form><br><br>
+        <div class="row" >
+            <div class="col-md-12 text-center">
+                <a type="submit" class="btn btn-primary" href="{% url 'backEnd:register_page'%}">注册</a>
+            </div>
+        </div>
 </div>
 
 </section>
