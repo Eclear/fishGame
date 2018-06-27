@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+
+<head>
+    <script src="/static/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <title>注册</title>
+</head>
+<body>
+<div class="text-center">
+<h1>请输入用户名和密码</h1><br><br><br>
+    <form action="{% url 'online:register'%}" method="post">
+
+        {% csrf_token %}
+
+        <label>用户名
+            <input type="text" name="username" class="form-control">
+        </label>
+        <br><br><br>
+
+        <label>密码
+            <input type="text" name="password" class="form-control">
+        </label>
+        <br><br><br>
+
+        <label>用户类型
+            <select type="text" name="type_" class="form-control">
+                {% for x in type_list %}
+                <option value ="{{ x }}">{{ x }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+
+        <br><br><br>
+
+        <input class="btn btn-primary"  type="submit" name = "sub" value="注册">
+        <a class="btn btn-primary" href="{% url 'online:online_page'%}">返回</a>
+        <br>
+    </form>
+</div>
+</body>
+</html>

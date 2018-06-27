@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+
+<head>
+    <script src="/static/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="refresh" content="10">
+    <title>服务员界面</title>
+</head>
+<body>
+<div class="text-center">
+    {% if my_call %}
+        <h1 class="alert">请到：{{ my_call.first.table_id }} 号餐桌</h1>
+        <a class="btn btn-info" href="{% url 'order:finish_call'  my_call.first.call_id waiter.user_id%}">完成请求</a>
+        <a class="btn btn-info" href="{% url 'order:finish_collect'  my_call.first.call_id waiter.user_id%}">完成结账</a>
+
+
+    {% endif %}
+
+
+    <h1>待处理请求</h1>
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th class="text-center">请求号</th>
+            <th class="text-center">桌号</th>
+            <th class="text-center">请求时间</th>
+            <th class="text-center">响应请求</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for call in calls %}
+            <tr>
+            <td class="text-center">{{ call.call_id }}</td>
+            <td class="text-center">{{ call.table_id }}</td>
+            <td class="text-center">{{ call.call_time }}</td>
+                {% if waiter.busy %}
+                    <td> </td>
+                    {% else %}
+                    <td class="text-center"><a class="btn btn-info" href="{% url 'order:respond' call.call_id waiter.user_id%}"">响应请求</a></td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h1>待上订单</h1><br><br><br>
+
+    <table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th class="text-center">订单号</th>
+        <th class="text-center">菜品名</th>
+        <th class="text-center">数量</th>
+        <th class="text-center">桌号</th>
+        <th class="text-center">状态</th>
+        <th class="text-center">完成上菜</th>
+        <th class="text-center">下单时间</th>
+    </tr>
+    </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td><a href="{% url 'order:order_detail' order.id %}">{{ order.id }}</a></td>
+            <td>{{ order.dish.dish_name }}</td>
+            <td>{{ order.dish_num }}</td>
+            <td>{{ order.table_num }}</td>
+            <td>{{ order.status }}</td>
+            <td><a class="btn btn-info" href="{% url 'order:serve_finish_action' order.id waiter.user_id%}">完成上菜</a></td>
+            <td>{{ order.order_time }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'online:logout_user' waiter.user_id%}">注销</a>
+</div>
+
+</body>
+</html>
+

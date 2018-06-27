@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户注册</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/tem2/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/tem2/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="/static/tem2/css/style.css">
+</head>
+<body>
+
+
+    <nav class="navbar navbar-fixed-top" id="header-nav">
+  <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+            <img src="/static/tem2/img/octopus.png" alt="Octopus logo" />
+        </a>
+    </div>
+    <div class="primary-menu">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <div id="navbar" class="navbar-collapse collapse">
+             <ul class="nav navbar-nav">
+                <li><a  href="{% url 'online:online_page'%}">主页</a></li>
+                <li><a data-scroll href="#portfolio">Portfolio</a></li>
+                <li><a data-scroll href="#about">About</a></li>
+                <li><a data-scroll href="#register">注册</a></li>
+            </ul>
+        </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="title text-center">
+                    <h2>员工注册</h2>
+                    <h6>请填写相关信息</h6>
+                    <div class="divider divider-lg"></div>
+                    <p>请在下方的输入框中输入您的用户名及密码，并选择您的用户组</p>
+                </div>
+            </div>
+        </div>
+
+    <form style="width: auto" action="{% url 'online:register'%}" method="post">
+        {% csrf_token %}
+       <div class="text-center" >
+           <div class="form-group text-center">
+               <input type="text" name="username" class="form-control" placeholder="用户名*">
+           </div>
+           <div class="form-group text-center">
+               <input type="text" name="password" class="form-control" placeholder="密码*">
+           </div>
+           <div class="form-group text-center">
+               <select type="text" name="type_" class="form-control">
+                {% for x in type_list %}
+                <option value ="{{ x }}">{{ x }}</option>
+                {% endfor %}
+                </select>
+           </div>
+
+
+
+        </div><br>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary" name="sub">注册</button>
+            </div>
+        </div>
+    </form><br><br>
+        <div class="row" >
+            <div class="col-md-12 text-center">
+                <a type="submit" class="btn btn-primary" href="{% url 'online:online_page'%}">返回</a>
+            </div>
+        </div>
+</div>
+
+</section>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <img src="/static/tem2/img/logo-white.png" class="logo-footer" />
+                <p>presented by 刘一宁，牛现坤，严熊白雪 </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="/static/tem2/js/jquery.mixitup.js"></script>
+<script type="text/javascript" src="/static/tem2/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/static/tem2/js/smooth-scroll.js"></script>
+<script src="/static/tem2/js/custom.js"></script>
+</body>
+</html>
+

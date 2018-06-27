@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^$',gv.game_view,name='game_view'),
-    url(r'^manage/', include('backEnd.urls',namespace='backEnd')),
+    url(r'^', include('backEnd.urls',namespace='backEnd')),
     url(r'^game/', include('game.urls',namespace='game')),
     url(r'^add/$', gv.add, name='add'),
     url(r'^update_data/$', gv.update_data, name='add'),
