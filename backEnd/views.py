@@ -47,3 +47,9 @@ def register(request):
         new_user = User.objects.create(username=_username,password=_password)
         gv.CURRENT_ID = new_user.user_id
         return HttpResponseRedirect(reverse('backEnd:online_page'))
+
+def logout(request,user_id):
+    _user = User.objects.get(user_id=user_id)
+    _user.online = False
+    _user.save()
+    return HttpResponseRedirect(reverse('backEnd:online_page'))

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
+from django.urls import reverse
 from django.http import JsonResponse
 import json
 
@@ -9,28 +10,41 @@ from django.shortcuts import render
 from django.shortcuts import render
 from backEnd.models import User
 
-def add_friend(id1,id2):
-    player1 = User.objects.get(user_id=id1)
-    player2 = User.objects.get(user_id=id2)
-    player1.friends.add(player2)
-    player2.friends.add(player1)
-    player1.save()
-    player2.save()
 
-def del_friend(id1,id2):
+def add_friend(request):
+    id1 = request.GET['id1']
+    id2 = request.GET['id2']
+    id1 = int(id1)
+    id2 = int(id2)
+    player1 = User.objects.get(user_id=id1)
+    # player2 = User.objects.get(user_name=name2)
+    player2s = User.objects.filter(user_id=id2)
+    if(len(player2s)>0):
+        player2 = player2s[0]
+        player1.friends.add(player2)
+        player2.friends.add(player1)
+        player1.save()
+        player2.save()
+        return HttpResponse("successfully add friend: "+player2.username)
+    else:
+        return HttpResponse("failed to add friend: "+str(id2)+",   typed a wrong user id")
+
+
+def del_friend(request,id1,id2):
     player1 = User.objects.get(user_id=id1)
     player2 = User.objects.get(user_id=id2)
     player1.friends.remove(player2)
     player2.friends.remove(player1)
     player1.save()
     player2.save()
+    return HttpResponseRedirect(reverse('customer_service:customer_main', args=(table_id,)))
 
 def empty_data():
     for player in User.objects.all():
         player.history_high = 0
         player.save()
 
-def game_view(request,user_id):
+def game_view(request, user_id):
     # add_friend(1,3)
     player = User.objects.get(user_id = user_id)
     high = player.history_high
@@ -39,9 +53,21 @@ def game_view(request,user_id):
     data = {
         'history_high': json.dumps(high),
         'friends': friends,
-        'user_id':json.dumps(user_id),
+        'user_id':json.dumps(int(user_id)),
     }
-    return render(request, 'tinyHeart.html', data)
+    # return render(request, 'tinyHeart.html', data)
+    return render(request, 'gamer_main.html', data)
+
+def friend_list(request, user_id):
+    player = User.objects.get(user_id=user_id)
+    high = player.history_high
+    friends = player.friends.all()
+    data = {
+        'history_high': json.dumps(high),
+        'friends': friends,
+        'user_id': json.dumps(int(user_id)),
+    }
+    return render(request, 'friend_list.html', data)
 
 def add(request):
     a = request.GET['a']

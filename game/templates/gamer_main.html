@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>game_page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'tem2/css/font-awesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'tem2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'tem2/css/style1.css' %}">
+
+
+    <style type="text/css">
+        body{
+            padding-top: 10px;
+        }
+        .all_bg{
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+        }
+        #allcanvas{
+            position: relative;
+            bottom:-100px;
+            width: 800px;
+            height: 600px;
+            margin: 0;
+        }
+        #canvas1{
+            /*front*/
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             z-index: 1;
+         }
+        #canvas2{
+            /*back*/
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+        }
+    </style>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="{% static 'game/js/jquery-3.3.1.min.js' %}"%3E%3C/script%3E'))</script>
+    <script type="text/javascript" src="{% static 'game/js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/commonFunctions.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/background.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/ane.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/fruit.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/bigFish.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/collision.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/baby.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/data.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/wave.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/waveRed.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/dust.js' %}"></script>
+    <script>
+            $(document).ready(function () {
+                var high = {{ history_high | safe }};
+                set_high(high);
+                game();
+                setInterval(function(){
+                  refreshData()
+                }, 3000);
+            });
+
+            //check the update of Database history high at fixed time(3s)
+            function refreshData(){
+                if(update_data()){
+                        var new_score = get_newscore();
+                        var id = {{ user_id | safe }};
+                        $.get("/update_data/",{'new_score':new_score,'id':id },function(ret){
+                    })
+                }
+            }
+
+            $(document).ready(function(){
+                //refresh high score
+                $("#sum").click(function () {
+                    if(update_data()){
+                        var new_score = get_newscore();
+                        var id = {{ user_id | safe }};
+                        alert(new_score);
+                        $.get("/update_data/",{'new_score':new_score,'id':id },function(ret){
+
+                    })
+                }
+                });
+
+            });
+    </script>
+
+</head>
+<body>
+    <header>
+    <nav class="navbar navbar-fixed-top" id="header-nav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+{#            <img src="../static/tem2/img/octopus.png" alt="Octopus logo" />#}
+            <img src="{% static 'tem2/img/octopus.png' %}" alt="Octopus logo" />
+        </a>
+    </div>
+    <div class="primary-menu">
+        <button  type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+        <div id="navbar" class="navbar-collapse collapse" >
+             <ul class="nav navbar-nav" >
+                <li><a href="{% url 'backEnd:online_page'%}">main page</a></li>
+                 <li><a href="{% url 'game:friend_list' user_id%}">friends</a></li>
+{#                <li><a href="{% url 'customer_service:call_serve' table_id%}">呼叫服务</a></li>#}
+{#                <li><a href="{% url 'customer_service:order_list' table_id%}">查看订单状态</a></li>#}
+{#                <li><a href="{% url 'customer_service:bill_list' table_id%}">查看账单及结账</a></li>#}
+            </ul>
+        </div>
+    </div>
+
+  </div>
+</nav>
+
+    <div class="main-head">
+     <div style="color:whitesmoke"  class="container">
+         <div class="row">
+            <div  class="col-md-8 col-md-offset-2" >
+                <h4>八爪鱼餐厅</h4>
+                <div class="divider"></div>
+                <h1 style="color:whitesmoke">餐桌自助终端</h1>
+{#                <a style="color:whitesmoke" href="{% url 'customer_service:dish_list' table_id%}" class="btn btn-primary btn-lg">点餐入口</a>#}
+{#                <a style="color:whitesmoke" href="{% url 'customer_service:call_serve' table_id%}" class="btn btn-primary btn-lg">呼叫服务</a>#}
+{#                <a style="color:whitesmoke" href="{% url 'customer_service:order_list' table_id%}" class="btn btn-primary btn-lg">查看订单状态</a>#}
+{#                <a style="color:whitesmoke" href="{% url 'customer_service:bill_list' table_id%}" class="btn btn-primary btn-lg">查看账单及结账</a>#}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="all_bg">
+     <div id="allcanvas">
+          <canvas id="canvas1" width="800" height="600"></canvas>
+          <canvas id="canvas2" width="800" height="600"></canvas>
+     </div>
+</div>
+<h3>history high:  {{ history_high |safe }}</h3><br>
+<h3>friends</h3>
+{% for friend in friends %}
+    <h4>{{ friend.username }}   {{ friend.history_high }}</h4>
+{% endfor %}
+
+</header>
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <img src="{% static 'tem2/img/logo-white.png' %}" class="logo-footer" />
+                <p>presented by 刘一宁</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../static/tem2/js/jquery.mixitup.js"></script>
+<script type="text/javascript" src="../static/tem2/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="../static/tem2/js/smooth-scroll.js"></script>
+<script src="../static/tem2/js/custom.js"></script>
+</body>
+</html>

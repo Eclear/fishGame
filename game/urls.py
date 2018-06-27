@@ -4,8 +4,9 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.game_view,name='game_view'),
-    url(r'^(?P<user_id>[0-9]+)$', views.game_view,name='game_view'),
+    # url(r'^$', views.game_view,name='game_view'),
+    url(r'^/(?P<user_id>[0-9]+)$', views.game_view,name='game_view'),
+    url(r'^friends/(?P<user_id>[0-9]+)$', views.friend_list,name='friend_list'),
     # url(r'^id=(?:id-(?P<user_id>[0-9]+)/)?$', views.game_view,name='game_view'),
 
 ]
