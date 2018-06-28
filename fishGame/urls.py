@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^add_friend/$', gv.add_friend, name='add'),
     url(r'^update_data/$', gv.update_data, name='add'),
     url(r'^clear_score/(?P<system_key>[0-9]+)$', bv.refresh_data,name='clear_score'),
+    url(r'^clear_score/$', bv.refresh_data,name='clear_score1'),
+    url(r'^clear_score/(.+)$', bv.refresh_data,name='clear_score1'),
 ]
