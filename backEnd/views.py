@@ -99,21 +99,23 @@ def logout(request,cryed_user_id):
     _user.save()
     return HttpResponseRedirect(reverse('backEnd:online_page'))
 
+def refresh_view(request):
+    return render(request, 'online/clear.html')
 
-
-def refresh_data(request,key):
-    # #clear score data with the url: localhost/clear_score/382b493f0c0d801f2b0d3701e15ae2b3
+def refresh_data(request):
+    # #clear score data with the url: localhost/refresh_view
+    # system key: 382b493f0c0d801f2b0d3701e15ae2b3
+    cryed_key = request.POST.get('password')
     pc = prpcrypt('keyskeyskeyskeys')  # 初始化密钥
-    # x = pc.decrypt(key)
-    return HttpResponse(pc.encrypt(str(1)))
-    # if(x == 'password'):
-    #     users = User.objects.all()
-    #     for user in users:
-    #         user.history_high = 0
-    #         user.save()
-    #     return HttpResponse('Cleared all scores.')
-
-
+    x = pc.decrypt(cryed_key)
+    if(x == 'password'):
+        users = User.objects.all()
+        for user in users:
+            user.history_high = 0
+            user.save()
+        return HttpResponse('Cleared high scores for all users.')
+    else:
+        return HttpResponse('Wrong system key')
 
 
 

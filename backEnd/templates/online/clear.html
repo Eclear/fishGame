@@ -12,7 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../../static/tem2/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../../static/tem2/css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="../../static/tem2/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/tem2/css/style-manager.css">
 </head>
 <body>
 
@@ -34,8 +34,7 @@
         <div id="navbar" class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
                 <li><a data-scroll href="#">Main Page</a></li>
-                <li><a data-scroll href="#login">Log in</a></li>
-                <li><a href="{% url 'backEnd:register_page'%}">sign up</a></li>
+                <li><a data-scroll href="#login">Type in Key</a></li>
             </ul>
         </div>
     </div>
@@ -47,10 +46,10 @@
      <div class="container">
          <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h4>Enjoy yourself at:</h4>
+                <h4>maintainer please type in system key</h4>
                 <div class="divider"></div>
-                <h1>Happy Fish!</h1>
-{#                <a href="{% url 'customer_service:customer_welcome'%}" class="btn btn-primary btn-lg">餐桌自助服务终端</a>#}
+                <h1>Happy Fish Clear Data</h1>
+                <a href="#login" class="btn btn-primary btn-lg">Type in system key</a>
             </div>
         </div>
     </div>
@@ -62,36 +61,28 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="title text-center">
-                    <h2>Log in</h2>
-                    <h6>Please sign in if you don't have an account</h6>
+                    <h2>Type in system key</h2>
+                    <h6></h6>
                     <div class="divider divider-lg"></div>
-                    <p>type in your username and password below</p>
+                    <p></p>
                 </div>
             </div>
         </div>
 
-    <form style="width: auto" action="{% url 'backEnd:login'%}" method="post">
+    <form style="width: auto" action="{% url 'clear_score2'%}" method="post">
         {% csrf_token %}
        <div class="text-center" >
            <div class="form-group text-center">
-               <input type="text" name="username" class="form-control" placeholder="user name*" required autocomplete="off">
-           </div>
-           <div class="form-group text-center">
-               <input type="text" name="password" class="form-control" placeholder="password*" required autocomplete="off">
+               <input type="text" name="password" class="form-control" placeholder="system key*" required autocomplete="off">
            </div>
 
         </div><br>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary" name="sub">Log in</button>
+                <button type="submit" class="btn btn-primary" name="sub">Confirm</button>
             </div>
         </div>
     </form><br><br>
-        <div class="row" >
-            <div class="col-md-12 text-center">
-                <a type="submit" class="btn btn-primary" href="{% url 'backEnd:register_page'%}">register</a>
-            </div>
-        </div>
 </div>
 
 </section>
