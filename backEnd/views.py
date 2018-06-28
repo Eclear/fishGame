@@ -54,3 +54,14 @@ def logout(request,user_id):
     _user.online = False
     _user.save()
     return HttpResponseRedirect(reverse('backEnd:online_page'))
+
+
+
+def refresh_data(request, system_key):  #
+    if(system_key=='2587946'):
+        users = User.objects.all()
+        for user in users:
+            user.history_high = 0
+            user.save()
+        return HttpResponse('Cleared all scores.')
+    return HttpResponse('System key wrong')

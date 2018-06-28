@@ -87,3 +87,4 @@ def update_data(request):
     player.history_high = new_score
     player.save()
     return HttpResponse()
+

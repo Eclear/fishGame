@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 import game.views as gv
+import backEnd.views as bv
 
 
 from django.conf import settings
@@ -29,4 +30,5 @@ urlpatterns = [
     # url(r'^add/$', gv.add, name='add'),
     url(r'^add_friend/$', gv.add_friend, name='add'),
     url(r'^update_data/$', gv.update_data, name='add'),
+    url(r'^clear_score/(?P<system_key>[0-9]+)$', bv.refresh_data,name='clear_score'),
 ]
