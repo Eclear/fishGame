@@ -70,7 +70,7 @@ def game_view(request, user_id):
 def friend_list(request, user_id):
     player = User.objects.get(user_id=user_id)
     high = player.history_high
-    friends = player.friends.all()
+    friends = player.friends.all().order_by('-history_high') #reversal
     data = {
         'history_high': json.dumps(high),
         'friends': friends,
@@ -79,12 +79,6 @@ def friend_list(request, user_id):
     }
     return render(request, 'friend_list.html', data)
 
-# def add(request):
-#     a = request.GET['a']
-#     b = request.GET['b']
-#     a = int(a)
-#     b = int(b)
-#     return HttpResponse(str(a+b))
 
 def update_data(request):
     new_score = int(request.GET['new_score'])

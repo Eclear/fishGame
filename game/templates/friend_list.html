@@ -60,9 +60,9 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse" >
          <ul class="nav navbar-nav" >
-             <li><a href="{% url 'game:friend_list' user_id%}">friends</a></li>
-{#             <li><a href="{% url 'backEnd:login_success' user_id%}">add friend</a></li>#}
-             <li><a href="{% url 'backEnd:logout_user' user_id%}">log off</a></li>
+             <li><a href="{% url 'game:friend_list' i_user_id%}">friends</a></li>
+{#             <li><a href="{% url 'game:game_view' i_user_id%}">back to game</a></li>#}
+             <li><a href="{% url 'backEnd:logout_user' i_user_id%}">log off</a></li>
          </ul>
         </div>
     </div>
