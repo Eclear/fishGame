@@ -57,7 +57,8 @@ def logout(request,user_id):
 
 
 
-def refresh_data(request, system_key):  #
+def refresh_data(request, system_key):
+    #clear score data with the url: localhost/clear_score/2587946
     if(system_key=='2587946'):
         users = User.objects.all()
         for user in users:

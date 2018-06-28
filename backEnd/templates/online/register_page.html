@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>用户注册</title>
+    <title>Sing in</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,10 +33,10 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
-                <li><a  href="{% url 'backEnd:online_page'%}">主页</a></li>
-                <li><a data-scroll href="#portfolio">Portfolio</a></li>
-                <li><a data-scroll href="#about">About</a></li>
-                <li><a data-scroll href="#register">注册</a></li>
+                <li><a  href="{% url 'backEnd:online_page'%}">main page</a></li>
+{#                <li><a data-scroll href="#portfolio">Portfolio</a></li>#}
+{#                <li><a data-scroll href="#about">About</a></li>#}
+                <li><a data-scroll href="#register">register</a></li>
             </ul>
         </div>
     </div>
@@ -50,10 +50,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="title text-center">
-                    <h2>员工注册</h2>
-                    <h6>请填写相关信息</h6>
+                    <h2>Register</h2>
+                    <h6>Please type in information below</h6>
                     <div class="divider divider-lg"></div>
-                    <p>请在下方的输入框中输入您的用户名及密码，并选择您的用户组</p>
+                    <p>Type in your user name and pass word</p>
                 </div>
             </div>
         </div>
@@ -62,10 +62,10 @@
         {% csrf_token %}
        <div class="text-center" >
            <div class="form-group text-center">
-               <input type="text" name="username" class="form-control" placeholder="用户名*">
+               <input type="text" name="username" class="form-control" placeholder="username*" required>
            </div>
            <div class="form-group text-center">
-               <input type="text" name="password" class="form-control" placeholder="密码*">
+               <input type="text" name="password" class="form-control" placeholder="password*" required>
            </div>
 {#           <div class="form-group text-center">#}
 {#               <select type="text" name="type_" class="form-control">#}
@@ -97,7 +97,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
             <img src="../../static/tem2/img/logo-white.png" class="logo-footer" />
-                <p>presented by 刘一宁，牛现坤，严熊白雪 </p>
+                <p>presented by 刘一宁</p>
             </div>
         </div>
     </div>

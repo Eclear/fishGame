@@ -33,9 +33,9 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
-                <li><a data-scroll href="#">主页</a></li>
-                <li><a data-scroll href="#login">登录</a></li>
-                <li><a href="{% url 'backEnd:register_page'%}">注册</a></li>
+                <li><a data-scroll href="#">Main Page</a></li>
+                <li><a data-scroll href="#login">Log in</a></li>
+                <li><a href="{% url 'backEnd:register_page'%}">sign up</a></li>
             </ul>
         </div>
     </div>
@@ -47,9 +47,9 @@
      <div class="container">
          <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h4>八爪鱼</h4>
+                <h4>Enjoy yourself at:</h4>
                 <div class="divider"></div>
-                <h1>餐厅自动化管理系统</h1>
+                <h1>Happy Fish!</h1>
 {#                <a href="{% url 'customer_service:customer_welcome'%}" class="btn btn-primary btn-lg">餐桌自助服务终端</a>#}
             </div>
         </div>
@@ -62,10 +62,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="title text-center">
-                    <h2>员工登录</h2>
-                    <h6>未注册用户请先注册</h6>
+                    <h2>Log in</h2>
+                    <h6>Please sign in if you don't have an account</h6>
                     <div class="divider divider-lg"></div>
-                    <p>请在下方的输入框中输入您的用户名及密码</p>
+                    <p>type in your username and password below</p>
                 </div>
             </div>
         </div>
@@ -74,22 +74,22 @@
         {% csrf_token %}
        <div class="text-center" >
            <div class="form-group text-center">
-               <input type="text" name="username" class="form-control" placeholder="用户名*">
+               <input type="text" name="username" class="form-control" placeholder="user name*" required>
            </div>
            <div class="form-group text-center">
-               <input type="text" name="password" class="form-control" placeholder="密码*">
+               <input type="text" name="password" class="form-control" placeholder="password*" required>
            </div>
 
         </div><br>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary" name="sub">登录</button>
+                <button type="submit" class="btn btn-primary" name="sub">Log in</button>
             </div>
         </div>
     </form><br><br>
         <div class="row" >
             <div class="col-md-12 text-center">
-                <a type="submit" class="btn btn-primary" href="{% url 'backEnd:register_page'%}">注册</a>
+                <a type="submit" class="btn btn-primary" href="{% url 'backEnd:register_page'%}">register</a>
             </div>
         </div>
 </div>
@@ -100,7 +100,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
             <img src="../../static/tem2/img/logo-white.png" class="logo-footer" />
-                <p>presented by 刘一宁，牛现坤，严熊白雪 </p>
+                <p>presented by 刘一宁</p>
             </div>
         </div>
     </div>
