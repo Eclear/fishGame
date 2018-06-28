@@ -5,7 +5,7 @@
     <title>friends</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="refresh" content="10">
+{#    <meta http-equiv="refresh" content="10">#}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free singlepage web template created by GraphBerry">
     <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
@@ -29,6 +29,16 @@
           });
         });
     </script>
+
+    <style type="text/css">
+        body{
+            padding-top: 10px;
+        }
+        td{
+             text-align:center;
+             height: 65px;
+        }
+    </style>
 
 
 </head>
@@ -71,16 +81,10 @@
                     <div class="divider divider-lg"></div>
                     <br>
                     <h3>add a friend: </h3>
-{#                    <form action="/add/" method="get">#}
-{#                        a: <input type="text" id="a" name="a"> <br>#}
-{#                        b: <input type="text" id="b" name="b">#}
-{#                        <br><br>#}
-{#                        <h6>result: <span id='result'></span></h6><br>#}
-{#                        <button type="button" id='sum'>add</button>#}
-{#                    </form>#}
+
                     <form action="/add_friend/" method="get">
                         <br>
-                        b: <input type="text" id="b" name="b">
+                        user id: <input type="text" id="b" name="b">
                         <br><br>
                         <h6>result: <span id='result'></span></h6><br>
                         <button type="button" id='sum'>add</button>
@@ -96,8 +100,7 @@
         {% csrf_token %}
 
         <br><br><br>
-
-        <table class="table table-striped table-hover ">
+    <table class="table table-striped table-hover ">
     <thead>
     <tr>
         <th class="text-center">rank</th>
@@ -114,21 +117,13 @@
         {% for friend in friends %}
         <tr>
             <td>
-{#            <a href="{% url 'order:order_detail' order.id%}">{{ order.id }}</a>#}
+            {{ forloop.counter }}
             </td>
             <td>{{ friend.username }}</td>
             <td>{{ friend.history_high }}</td>
-{#            <td><a class="btn btn-info" href="{% url 'order:cook' order.id cook_id%}">烹饪</a></td>#}
-
-
-{#            {% ifequal order.status "待做" %}#}
-{#                <td><a class="btn btn-info" href="{% url 'order:cook' order.id cook_id%}">烹饪</a></td>#}
-{#                <td></td>#}
-{#            {% else %}#}
-{#                <td></td>#}
-{#                <td><a class="btn btn-info" href="{% url 'order:cook_finish_action' order.id cook_id%}">完成烹饪</a></td>#}
-{#            {% endifequal %}#}
-{#            <td>{{ order.order_time }}</td>#}
+            {% ifnotequal i_user_id friend.user_id %}
+            <td><a class="btn btn-info" href="{% url 'game:del_friend' user_id friend.user_id%}">Delete</a></td>
+            {% endifnotequal %}
         </tr>
         {% endfor %}
         </tbody>

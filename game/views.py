@@ -11,6 +11,14 @@ from django.shortcuts import render
 from backEnd.models import User
 
 
+def relate(id1,id2):
+    player1 = User.objects.get(user_id=id1)
+    player2 = User.objects.get(user_id=id2)
+    player1.friends.add(player2)
+    player2.friends.add(player1)
+    player1.save()
+    player2.save()
+
 def add_friend(request):
     id1 = request.GET['id1']
     id2 = request.GET['id2']
@@ -37,7 +45,7 @@ def del_friend(request,id1,id2):
     player2.friends.remove(player1)
     player1.save()
     player2.save()
-    return HttpResponseRedirect(reverse('customer_service:customer_main', args=(table_id,)))
+    return HttpResponseRedirect(reverse('game:friend_list', args=(id1,)))
 
 def empty_data():
     for player in User.objects.all():
@@ -48,7 +56,8 @@ def game_view(request, user_id):
     # add_friend(1,3)
     player = User.objects.get(user_id = user_id)
     high = player.history_high
-    friends = player.friends.all()
+    friends = player.friends.all().order_by('history_high')
+
     # friends = User.objects.all()
     data = {
         'history_high': json.dumps(high),
@@ -66,15 +75,16 @@ def friend_list(request, user_id):
         'history_high': json.dumps(high),
         'friends': friends,
         'user_id': json.dumps(int(user_id)),
+        'i_user_id':int(user_id),
     }
     return render(request, 'friend_list.html', data)
 
-def add(request):
-    a = request.GET['a']
-    b = request.GET['b']
-    a = int(a)
-    b = int(b)
-    return HttpResponse(str(a+b))
+# def add(request):
+#     a = request.GET['a']
+#     b = request.GET['b']
+#     a = int(a)
+#     b = int(b)
+#     return HttpResponse(str(a+b))
 
 def update_data(request):
     new_score = int(request.GET['new_score'])

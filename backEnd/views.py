@@ -45,6 +45,7 @@ def register(request):
         return HttpResponse('该用户名已存在！')
     else:
         new_user = User.objects.create(username=_username,password=_password)
+        gv.relate(new_user.user_id, new_user.user_id)
         gv.CURRENT_ID = new_user.user_id
         return HttpResponseRedirect(reverse('backEnd:online_page'))
 
