@@ -122,7 +122,7 @@
             <td>{{ friend.history_high }}</td>
             <td>{{ friend.online }}</td>
             {% ifnotequal i_user_id friend.user_id %}
-            <td><a class="btn btn-info" href="{% url 'game:del_friend' user_id friend.user_id%}">Delete</a></td>
+            <td><a class="btn btn-info" href="{% url 'game:del_friend2'%}?p1={{ cryed_user_id }}&p2={{ friend.user_id }}">Delete</a></td>
             {% endifnotequal %}
         </tr>
         {% endfor %}

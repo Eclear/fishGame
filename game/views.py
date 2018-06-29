@@ -63,15 +63,29 @@ def add_friend(request):
         return HttpResponse("failed to add friend: "+str(id2)+",   typed a wrong user id")
 
 
-def del_friend(request,id1,id2):
+# def del_friend(request,id2,cryed_id1):
+#     pc = prpcrypt('keyskeyskeyskeys')
+#     id1 = int(pc.decrypt(cryed_id1))
+#     player1 = User.objects.get(user_id=id1)
+#     player2 = User.objects.get(user_id=id2)
+#     player1.friends.remove(player2)
+#     player2.friends.remove(player1)
+#     player1.save()
+#     player2.save()
+#     return HttpResponseRedirect(reverse('game:friend_list1', args=(pc.encrypt(id1),)))
+
+def del_friend(request):
+    cryed_id1 = request.GET.get('p1')
+    id2 = request.GET.get('p2')
+    pc = prpcrypt('keyskeyskeyskeys')
+    id1 = int(pc.decrypt(cryed_id1))
     player1 = User.objects.get(user_id=id1)
     player2 = User.objects.get(user_id=id2)
     player1.friends.remove(player2)
     player2.friends.remove(player1)
     player1.save()
     player2.save()
-    pc = prpcrypt('keyskeyskeyskeys')
-    return HttpResponseRedirect(reverse('game:friend_list1', args=(pc.encrypt(id1),)))
+    return HttpResponseRedirect(reverse('game:friend_list1', args=(cryed_id1,)))
 
 def empty_data():
     for player in User.objects.all():
